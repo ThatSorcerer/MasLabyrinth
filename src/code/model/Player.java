@@ -10,6 +10,11 @@ import code.model.Token;
  * 
  * @author Weijin,Ken,Ian (3-17-16)
  * @author Ian,Ken 04-10-16
+ * @author Sal, Christian 04-25-16
+ *
+ */
+/**
+ * @author ccaba_000
  *
  */
 public class Player {  
@@ -65,17 +70,32 @@ public class Player {
 	 */
 	private int _score; //sum of token values
 	
+	/**
+	 * 
+	 */
+	private int _wands;
+	
+	/**
+	 * 
+	 * 
+	 * @author Sal, Christian 04-25-16
+	 */
+	private GenericFormulaCard _myCard;
 	
 	/**
 	 * The constructor Player assigns the instance variable _color to the String c
 	 * 
 	 * @param c is the color of the player
-	 * @author Weijin,Ken,Ian 
+	 * @author Weijin,Ken,Ian
+	 * @author Sal, Christian 04-25-16 // initialize score to 9 along with player due to magic wands(3x)
 	 */
+	
+	
 	public Player(String c){
 		_color = c;		
 		_myTokens = new ArrayList<Token>();
-		_score = 0;
+		_score = 9;
+		_wands = 3;
 	}
 	
 	/**
@@ -297,14 +317,26 @@ public class Player {
 	public int getScore(){
 		return _score;
 	}
+	
+	/**
+	 * @param s
+	 */
+	protected void setScore(int score){
+		_score += score;
+	}
+	
+	
 	/**
 	 * This method returns the player's tokens that he/she picked up 
-	 * @return toekns of the player
+	 * @return tokens of the player
 
 	 * @author satya, Josh 04-15-16
+	 * 
+	 * @author Sal, Christian 04-25-16
 	 */
-	public void setScore(int score){
-		_score = score;
+	public void setTokenScore(Token t){
+		int ingredientbonus = _myCard.hasIngredient(t.getValue()) ? 20:0;
+		_score += (t.getValue() + ingredientbonus);
 	}
 	
 	/**
@@ -356,5 +388,36 @@ public class Player {
 	 */
 	public void addToken(Token t){
 		_myTokens.add(t);
+		setTokenScore(t);
 	}
+	
+	/**
+	 * @param myCard
+	 * 
+	 * @author Sal, Christian 04-25-16
+	 */
+	public void setCard(GenericFormulaCard myCard){
+		_myCard = myCard;
+	}
+	
+	/**
+	 * 
+	 * @author Sal, Christian 04-25-16
+	 */
+	public void useWand(){
+		if(_wands>=1){
+			setScore(-3);
+			_wands--;
+		}
+	}
+
+	/**
+	 * 
+	 * @return
+	 * @author Sal, Christian 04-25-16
+	 */
+	public int getWands(){
+		return _wands;
+	}
+	
 }
