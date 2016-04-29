@@ -65,6 +65,13 @@ public class GameBoard {
 	private ArrayList<MoveableTile> _arrayOfMoveTiles;
 	
 	/**
+	 * 
+	 * @author Andreirv SlGreko
+	 * 
+	 */
+	private ArrayList<GenericFormulaCard> _arrayOfFormulaCards;
+		
+	/**
 	 * The number of players on the board/in the game.
 	 */
 	private int _numOfPlayers;
@@ -102,6 +109,7 @@ public class GameBoard {
 		}
 			_board = new AbstractTile[7][7];
 			_arrayOfMoveTiles = new ArrayList<MoveableTile>();
+			_arrayOfFormulaCards = new ArrayList<GenericFormulaCard>();
 			_numOfPlayers = numPlayers;
 			_players = new Player[_numOfPlayers];
 			_tokens = new ArrayList<Token>();
@@ -145,6 +153,44 @@ public class GameBoard {
 		populateStaticBoardWithTokens();
 		CURRENTPLAYER = _players[0];
 	}
+	
+	/**
+	 * 
+	 * @author AndreIrv	SlGreco
+	 * 
+	 */
+	public void generateFormulaCardRandomly(){
+		_arrayOfFormulaCards.add(new GenericFormulaCard(1,2,3));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(4,5,6));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(7,8,9));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(10,11,12));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(13,14,15));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(16,17,18));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(19,20,25));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(1,4,7));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(2,5,8));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(3,6,9));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(10,13,16));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(11,14,17));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(12,15,18));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(19,1,2));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(20,4,5));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(25,5,6));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(3,10,17));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(1,5,20));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(7,17,25));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(9,20,25));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(1,12,20));
+		
+		Collections.shuffle(_arrayOfFormulaCards);
+		
+	}
+	
+	public GenericFormulaCard() {
+		//TODO:AYY LMAO FORMULA CARDS
+		System.out.println("You almost got a card, but we \"ran out\" of cards");
+	}
+	
 	
 	/**
 	 * This method ads tokens to arraylist
