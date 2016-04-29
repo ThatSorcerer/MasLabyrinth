@@ -102,6 +102,8 @@ public class GameBoard {
 	 * @param numPlayers refers to the number of players that will be on the board
 	 * @author Ken, Ian, Josh
 	 * @author Ian, Satya 04-10-16
+	 * 
+	 * @author Sal, Christian 04-28-16
 	 */
 	public GameBoard(int numPlayers){
 		if(numPlayers < 0 || numPlayers > Player.maxNumberOfPlayers) {
@@ -109,11 +111,13 @@ public class GameBoard {
 		}
 			_board = new AbstractTile[7][7];
 			_arrayOfMoveTiles = new ArrayList<MoveableTile>();
-			_arrayOfFormulaCards = new ArrayList<GenericFormulaCard>();
+			_arrayOfFormulaCards = new ArrayList<GenericFormulaCard>(); //
 			_numOfPlayers = numPlayers;
 			_players = new Player[_numOfPlayers];
 			_tokens = new ArrayList<Token>();
 			currentPlayerIndex = 0;
+			
+			generateFormulaCardRandomly();
 	}
 	/**
 	 * This method populates the board
@@ -133,6 +137,7 @@ public class GameBoard {
 		populateTokenArray();
 		populateBoardWithTokensRandomly();
 		CURRENTPLAYER = _players[0];
+
 	}
 	
 	/**
@@ -152,43 +157,51 @@ public class GameBoard {
 		populateTokenArray();
 		populateStaticBoardWithTokens();
 		CURRENTPLAYER = _players[0];
+
 	}
 	
 	/**
 	 * 
-	 * @author AndreIrv	SlGreco
+	 * @author AndreIrv	SlGreco ccaballe 04-28-16
 	 * 
 	 */
 	public void generateFormulaCardRandomly(){
-		_arrayOfFormulaCards.add(new GenericFormulaCard(1,2,3));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(4,5,6));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(7,8,9));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(10,11,12));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(13,14,15));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(16,17,18));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(19,20,25));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(1,4,7));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(2,5,8));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(3,6,9));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(10,13,16));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(11,14,17));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(12,15,18));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(19,1,2));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(20,4,5));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(25,5,6));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(3,10,17));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(1,5,20));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(7,17,25));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(9,20,25));
-		_arrayOfFormulaCards.add(new GenericFormulaCard(1,12,20));
 		
-		Collections.shuffle(_arrayOfFormulaCards);
+		_arrayOfFormulaCards.add(new GenericFormulaCard(5,25,18));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(20,17,3));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(19,7,15));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(6,14,8));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(16,9,7));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(13,15,12));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(14,4,10));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(17,5,6));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(3,18,1));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(9,20,11));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(8,19,5));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(18,11,19));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(10,12,16));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(15,2,4));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(2,8,17));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(7,6,25));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(12,1,9));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(4,13,20));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(25,16,2));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(11,3,14));
+		_arrayOfFormulaCards.add(new GenericFormulaCard(1,10,13));
+		
+		System.out.println("Generated");
+//		Collections.shuffle(_arrayOfFormulaCards);
 		
 	}
 	
-	public GenericFormulaCard() {
-		//TODO:AYY LMAO FORMULA CARDS
-		System.out.println("You almost got a card, but we \"ran out\" of cards");
+	/**
+	 * @return
+	 * 
+	 * @author AndreIrv	SlGreco ccaballe 04-28-16
+	 */
+	public GenericFormulaCard getFormulaCard() {
+		Collections.shuffle(_arrayOfFormulaCards);
+		return _arrayOfFormulaCards.remove(0);		
 	}
 	
 	
@@ -219,7 +232,9 @@ public class GameBoard {
 		_tokens.add(new Token(20, "Black Rooster"));
 		_tokens.add(new Token(25, "Berries of Mistletoe"));
 		
-		_currentTargetToken = _tokens.get(0); //initialize current token to token (1, "Crab Apple")
+		_currentTargetToken = _tokens.get(0);  //initialize current token to token (1, "Crab Apple")
+		
+	
 	}
 	
 	/**This is the tokens population for random board
@@ -473,12 +488,15 @@ public class GameBoard {
 	/**this method populates the board w/ between 1 and 4 players in the color order tan, blue,red and white at the 
 	 * corresponding correct starting board locations
 	 * 
-	 * @author Ken, Ian
+	 * @author Ken, Ian, 
+	 * 
+	 * @author AndreIrv	SlGreco ccaballe 4/28
 	*/
 	public void createAndPlacePlayers(){
 		AbstractTile[] at = {_board[2][2], _board[2][4], _board[4][2], _board[4][4]};
 		for(int i = 0; i<_numOfPlayers;i++){
 			Player p = new Player(Player._validColors[i]);
+			p.setCard(getFormulaCard());                     //added
 			p.setCurrentTile(at[i]);
 			p.setGameBoard(this);
 			_players[i] = p;

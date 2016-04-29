@@ -82,6 +82,8 @@ public class Player {
 	 */
 	private GenericFormulaCard _myCard;
 	
+	private boolean _hasUsedWand;
+	
 	/**
 	 * The constructor Player assigns the instance variable _color to the String c
 	 * 
@@ -218,6 +220,8 @@ public class Player {
 	 * @param t the token picked up
 	 * @author Weijin, Ian 03-18-16
 	 * @author Ian, Satya 04-10-16
+	 * 
+	 * @author Sal, Christian 04-28-16
 	 */
 	public boolean pickUpToken(Token t){
 		
@@ -254,7 +258,8 @@ public class Player {
 			AbstractTile at = t.getTile();
 			at.removeToken();
 			//t.setTile(null);
-			_score = _score + t.getValue();
+//			_score = _score + t.getValue();
+			setTokenScore(t);
 			_gb.toggleNextToken();
 			_gb.playerHasAlteredBoard();
 			
@@ -265,6 +270,8 @@ public class Player {
 					"\nCurrent Collectible Token Number: " + _gb.getCurrentTargetTokenValue();
 			_gb.updateGameFeedBack(s);
 			}
+			
+			System.out.println(_score);
 			return true;
 		}
 		return false;
@@ -337,6 +344,7 @@ public class Player {
 	public void setTokenScore(Token t){
 		int ingredientbonus = _myCard.hasIngredient(t.getValue()) ? 20:0;
 		_score += (t.getValue() + ingredientbonus);
+		System.out.println(_score);
 	}
 	
 	/**
@@ -374,12 +382,27 @@ public class Player {
 	}
 	
 	/**
+	 * 
 	 * This method sets boolean _hasInsertedThisTurn and _hasMovedThisTurn to false
 	 * @author Ian,Ken 04-10-16
+	 * 
+	 * @author Sal, Christian 04-28-16
 	 */
 	public void endMyTurn(){
 		_hasInsertedThisTurn = false;
 		_hasMovedThisTurn = false;
+		_hasUsedWand = false;
+	}
+	
+	
+	
+	/**
+	 * 
+	 * @author Sal, Christian 04-28-16
+	 */
+	public void newTurn(){
+		endMyTurn();
+		_hasUsedWand = true;
 	}
 	
 	/**
@@ -388,7 +411,7 @@ public class Player {
 	 */
 	public void addToken(Token t){
 		_myTokens.add(t);
-		setTokenScore(t);
+		setTokenScore(t);			//added		
 	}
 	
 	/**
@@ -398,6 +421,7 @@ public class Player {
 	 */
 	public void setCard(GenericFormulaCard myCard){
 		_myCard = myCard;
+		
 	}
 	
 	/**
@@ -405,6 +429,7 @@ public class Player {
 	 * @author Sal, Christian 04-25-16
 	 */
 	public void useWand(){
+		newTurn();
 		if(_wands>=1){
 			setScore(-3);
 			_wands--;
@@ -419,5 +444,16 @@ public class Player {
 	public int getWands(){
 		return _wands;
 	}
+	
+	/**
+	 * @return
+	 * 
+	 * @author Sal, Christian 04-28-16
+	 */
+	public String getCard(){
+		return _playerName + " : " + _myCard.ingredient1 + "," + _myCard.ingredient2 + ","+ _myCard.ingredient3;
+	}
+	
+	
 	
 }
