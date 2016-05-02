@@ -185,7 +185,7 @@ public class GameBoardGUI implements Runnable, Observer{
 				if(GameBoard.CURRENTPLAYER.getHasInsertedThisTurn()){
 					GameBoard.CURRENTPLAYER.endMyTurn();
 					_gb.toggleNextPlayer();
-					_gameFeedback.setText("\t\t\t\tGAME INFO\n\nIt is now " + GameBoard.CURRENTPLAYER.getCard() +
+					_gameFeedback.setText("\t\t\t\tGAME INFO\n\nIt is now " + GameBoard.CURRENTPLAYER.getName() +
 							"'s (" + GameBoard.CURRENTPLAYER.getColor() + " pawn) turn."+
 									"\nCurrent Collectible Token Number: " + _gb.getCurrentTargetTokenValue());
 					_gameFeedback.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -197,7 +197,7 @@ public class GameBoardGUI implements Runnable, Observer{
 						if(p == GameBoard.CURRENTPLAYER){cp = i;}
 						if(p != GameBoard.CURRENTPLAYER){
 							String t2 = "";
-							t1 = t1 + "Player " + i + ": " + p.getCard() + " (" + p.getColor() + " Pawn) -- Tokens Coll.: ";
+							t1 = t1 + "Player " + i + ": " + p.getName() + " (" + p.getColor() + " Pawn) -- Tokens Coll.: ";
 							for(Token t: p.getTokens()){
 								t2 = t2 + t.getValue() + " ";
 							}
@@ -209,8 +209,8 @@ public class GameBoardGUI implements Runnable, Observer{
 					for(Token t: p.getTokens()){
 						tokens = tokens + t.getValue() + " ";
 					}
-					_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getCard() + " (" + 
-							p.getColor() + " Pawn) \n" /*Current Score: "+
+					_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getCard() + p.wandCount() +
+							" \n" /*Current Score: "+
 							p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 							+ "\n\n" + t1);
 					_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -271,7 +271,7 @@ public class GameBoardGUI implements Runnable, Observer{
 		_gameFeedback.setPreferredSize(new Dimension(720,180));
 		_gameFeedbackPanel.add(_gameFeedback);
 		_gameFeedback.setBackground(new Color(245,245,220));
-		_gameFeedback.setText("\t\t\t\tGAME INFO\n\nIt is now " + GameBoard.CURRENTPLAYER.getCard() + "'s (" + GameBoard.CURRENTPLAYER.getColor()+" pawn) turn."+
+		_gameFeedback.setText("\t\t\t\tGAME INFO\n\nIt is now " + GameBoard.CURRENTPLAYER.getName() + "'s (" + GameBoard.CURRENTPLAYER.getColor()+" pawn) turn."+
 				"\nCurrent Collectible Token Number: " + _gb.getCurrentTargetTokenValue());
 		_gameFeedback.setFont(new Font("Garamond", Font.BOLD, 14));
 	}
@@ -311,8 +311,8 @@ public class GameBoardGUI implements Runnable, Observer{
 		for(Token t: p.getTokens()){
 			tokens = tokens + t.getValue() + " ";
 		}
-		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-				p.getColor() + " Pawn) \n" /*Current Score: "+
+		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getCard() + p.wandCount() + 
+				" \n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 				+ "\n\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -636,8 +636,8 @@ public class GameBoardGUI implements Runnable, Observer{
 		for(Token t: p.getTokens()){
 			tokens = tokens + t.getValue() + " ";
 		}
-		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-				p.getColor() + " Pawn) \n" /*Current Score: "+
+		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getCard() + p.wandCount() +
+			" \n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 				+ "\n\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));
@@ -731,8 +731,8 @@ public class GameBoardGUI implements Runnable, Observer{
 		for(Token t: p.getTokens()){
 			tokens = tokens + t.getValue() + " ";
 		}
-		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getName() + " (" + 
-				p.getColor() + " Pawn) \n" /*Current Score: "+
+		_playerInfo.setText("\t\t\t\tPLAYER INFO\n\nCurrent Player (" + cp +"): " + p.getCard() + p.wandCount() +
+				" \n" /*Current Score: "+
 				p.getScore() + "\n" */+ "My Tokens Collected: " + tokens
 				+ "\n\n" + t1);
 		_playerInfo.setFont(new Font("Garamond", Font.BOLD, 14));

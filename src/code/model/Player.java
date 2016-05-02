@@ -451,7 +451,12 @@ public class Player {
 	 * @author Sal, Christian 04-28-16
 	 */
 	public String getCard(){
-		return _playerName + " : " + _myCard.ingredient1 + "," + _myCard.ingredient2 + ","+ _myCard.ingredient3;
+		return _playerName + " (" + _color + " Pawn)" +" - Secret Formula Card: " + _myCard.ingredient1 + "," + _myCard.ingredient2 + ","+ _myCard.ingredient3
+				+ " -";
+	}
+	
+	public String wandCount(){
+		return " Wand Count: " + _wands;
 	}
 	
 	
