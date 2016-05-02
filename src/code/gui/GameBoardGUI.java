@@ -124,6 +124,11 @@ public class GameBoardGUI implements Runnable, Observer{
 	private JButton _endTurnButton;
 	
 	/**
+	 * 
+	 */
+	private JButton _useMyWandButton;
+	
+	/**
 	 * This method sets the observer for the gameboard
 	 * gb refers to the GameBoard object
 	 * @param gb refers to GameBoard
@@ -244,10 +249,28 @@ public class GameBoardGUI implements Runnable, Observer{
 		_boardPanel.setAlignmentX(JComponent.CENTER_ALIGNMENT);
 		
 		
+		
+		
+		
+		_useMyWandButton = new JButton();
+		_useMyWandButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(GameBoard.CURRENTPLAYER.getWands() > 0 && !GameBoard.CURRENTPLAYER.playerUsedWand() ){
+					GameBoard.CURRENTPLAYER.useWand();		
+					update();
+				}
+			}	
+		});
+		
+		
+		
+		
 		_rightPanel.add(_playerInfoPanel);
 		_rightPanel.add(_shiftableTilePanel);
 		_rightPanel.add(_gameFeedbackPanel);
 		_rightPanel.add(_endTurnButton);
+//		_rightPanel.add(_useMyWand);
 		
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_window.pack();

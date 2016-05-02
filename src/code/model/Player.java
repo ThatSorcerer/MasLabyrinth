@@ -82,6 +82,9 @@ public class Player {
 	 */
 	private GenericFormulaCard _myCard;
 	
+	/**
+	 * 
+	 */
 	private boolean _hasUsedWand;
 	
 	/**
@@ -434,6 +437,7 @@ public class Player {
 			setScore(-3);
 			_wands--;
 		}
+		_hasUsedWand = true;
 	}
 
 	/**
@@ -455,10 +459,19 @@ public class Player {
 				+ " -";
 	}
 	
+	/**
+	 * @return
+	 */
 	public String wandCount(){
 		return " Wand Count: " + _wands;
 	}
 	
+	/**
+	 * @return
+	 */
+	public boolean playerUsedWand(){
+		return _hasUsedWand;
+	}
 	
 	
 }
