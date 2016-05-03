@@ -45,7 +45,7 @@ public class GameBoardGUI implements Runnable, Observer{
 	 * _leftPanel and _rightPanel
 	 */
 	private JFrame _window;
-	
+		
 	/**
 	 * reference to the panel that the gameboard is on
 	 */
@@ -123,10 +123,34 @@ public class GameBoardGUI implements Runnable, Observer{
 	 */
 	private JButton _endTurnButton;
 	
+	
 	/**
 	 * 
+	 * @author Christian, Sal 5-2-16
+	 */
+	private JFrame _wandWindow;
+	
+	/**
+	 * 
+	 * @author Christian, Sal 5-2-16
+	 */
+	private JPanel _wandPanel;
+	
+	/**
+	 * 
+	 * @author Christian, Sal 5-2-16
 	 */
 	private JButton _useMyWandButton;
+	
+	/**
+	 * @author Christian, Sal 5-2-16
+	 */
+	private JButton _saveButton;
+	
+	/**
+	 * @author Christian, Sal 5-2-16
+	 */
+	private JButton _restoreButton;
 	
 	/**
 	 * This method sets the observer for the gameboard
@@ -148,6 +172,9 @@ public class GameBoardGUI implements Runnable, Observer{
 	 * these panels. This method also creates a JButton named "end turn" and add the ActionListener to it.
 	 * @author Ian,Weijin
 	 * @author Ian,Ken 04-10-16
+	 * 
+	 * 
+	 * @author Christian, Sal 5-2-16
 	 */
 	@Override public void run() {	
 		_window = new JFrame("Master Labyrinth");
@@ -171,10 +198,59 @@ public class GameBoardGUI implements Runnable, Observer{
 		//_leftPanelBack.setSize(720,720);
 		_rightPanel.setSize(720,720);
 		
+		
+		_wandWindow = new JFrame();
+		_wandPanel = new JPanel();
+		
+		_useMyWandButton = new JButton("Use Wand");
+		_useMyWandButton.setFont(new Font("Garamond", Font.BOLD, 40));
+		_useMyWandButton.setForeground(new Color(255,201,14));
+		_useMyWandButton.setPreferredSize(new Dimension(250,100));
+		_useMyWandButton.setBackground(new Color(0,0,0));
+		_useMyWandButton.addActionListener(new ActionListener(){
+			
+			
+			/**
+			 * 
+			 * @author Christian, Sal 5-2-16
+			 */
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(GameBoard.CURRENTPLAYER.getWands() > 0 && !GameBoard.CURRENTPLAYER.playerUsedWand() ){
+					GameBoard.CURRENTPLAYER.useWand();		
+					update();
+				}
+			}	
+		});
+		
+		
+		_saveButton = new JButton("Save");
+		_saveButton.setFont(new Font("Garamond", Font.BOLD, 40));
+		_saveButton.setForeground(new Color(255,201,14));
+		_saveButton.setPreferredSize(new Dimension(250,100));
+		_saveButton.setBackground(new Color(0,0,0));
+		
+		
+		_restoreButton = new JButton("Restore");
+		_restoreButton.setFont(new Font("Garamond", Font.BOLD, 40));
+		_restoreButton.setForeground(new Color(255,201,14));
+		_restoreButton.setPreferredSize(new Dimension(250,100));
+		_restoreButton.setBackground(new Color(0,0,0));
+		
+		
+		_wandPanel.add(_useMyWandButton);
+		_wandPanel.add(_saveButton);
+		_wandPanel.add(_restoreButton);
+		_wandWindow.add(_wandPanel);
+		_wandWindow.pack();
+		
+		
+		
+		
 		_endTurnButton = new JButton("End Turn");
 		_endTurnButton.setFont(new Font("Garamond", Font.BOLD, 40));
 		_endTurnButton.setForeground(new Color(255,201,14));
-		_endTurnButton.setPreferredSize(new Dimension(720,180));
+		_endTurnButton.setPreferredSize(new Dimension(180,180));
 		_endTurnButton.setBackground(new Color(0,0,0));
 		_endTurnButton.addActionListener(new ActionListener(){
 			
@@ -252,17 +328,6 @@ public class GameBoardGUI implements Runnable, Observer{
 		
 		
 		
-		_useMyWandButton = new JButton();
-		_useMyWandButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(GameBoard.CURRENTPLAYER.getWands() > 0 && !GameBoard.CURRENTPLAYER.playerUsedWand() ){
-					GameBoard.CURRENTPLAYER.useWand();		
-					update();
-				}
-			}	
-		});
-		
 		
 		
 		
@@ -270,14 +335,17 @@ public class GameBoardGUI implements Runnable, Observer{
 		_rightPanel.add(_shiftableTilePanel);
 		_rightPanel.add(_gameFeedbackPanel);
 		_rightPanel.add(_endTurnButton);
-//		_rightPanel.add(_useMyWand);
+		
 		
 		_window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		_wandWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		_window.pack();
 		
 		update();
 		
 		_window.setVisible(true);
+		_window.setLocationRelativeTo(null);
+		_wandWindow.setVisible(true);
 	}
 	
 	/**

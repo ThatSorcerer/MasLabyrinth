@@ -455,12 +455,14 @@ public class Player {
 	 * @author Sal, Christian 04-28-16
 	 */
 	public String getCard(){
-		return _playerName + " (" + _color + " Pawn)" +" - Secret Formula Card: " + _myCard.ingredient1 + "," + _myCard.ingredient2 + ","+ _myCard.ingredient3
-				+ " -";
+		return _playerName + " (" + _color + " Pawn)" +" - Secret Formula Card:(" + _myCard.ingredient1 + "," + _myCard.ingredient2 + ","+ _myCard.ingredient3
+				+ ") -";
 	}
 	
 	/**
 	 * @return
+	 * 
+	 * @author Sal, Christian 05-2-16
 	 */
 	public String wandCount(){
 		return " Wand Count: " + _wands;
@@ -468,6 +470,7 @@ public class Player {
 	
 	/**
 	 * @return
+	 * @author Sal, Christian 05-2-16
 	 */
 	public boolean playerUsedWand(){
 		return _hasUsedWand;
