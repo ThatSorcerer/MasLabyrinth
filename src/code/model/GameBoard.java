@@ -88,6 +88,12 @@ public class GameBoard {
 	 */
 	private GameBoardGUI _observer;
 	
+	int lastInPoint=0;
+	
+	
+	
+	
+	
 //	private int _turns;
 	
 	/** 
@@ -107,6 +113,8 @@ public class GameBoard {
 	 * 
 	 * @author Sal, Christian 04-28-16
 	 */
+	
+	
 	public GameBoard(int numPlayers){
 		if(numPlayers < 0 || numPlayers > Player.maxNumberOfPlayers) {
 			numPlayers = 4;
@@ -143,6 +151,18 @@ public class GameBoard {
 		}
 		
 		//TODO: double check to make sure this is all done here!!
+	}
+	
+	public void setlastInPoint (int n){
+		
+		lastInPoint = n;
+		
+	}
+	
+	public void saveGameInstance(int n){
+		Save _save = new Save(n);
+		
+		
 	}
 	
 	/**
