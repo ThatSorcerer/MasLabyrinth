@@ -28,7 +28,7 @@ public class Player {
 	/**
 	 * a String array holding the valid colors for the game
 	 */
-	public static final String[] _validColors = new String[] {"Tan","Blue","Red","White"};
+	public static final String[] _validColors = new String[] {"TAN","BLUE","RED","WHITE"};
 	
 	/**
 	 * true if player has shifted this turn; false otherwise
@@ -101,6 +101,23 @@ public class Player {
 		_myTokens = new ArrayList<Token>();
 		_score = 9;
 		_wands = 3;
+	}
+	
+	/**
+	 * 
+	 * @param c
+	 */
+	public Player(String name, String color, int wands, ArrayList<Token> tokens, GenericFormulaCard card){
+		_color = color;
+		_playerName = name;
+		_wands = wands;
+		_myCard = card;
+		_myTokens = new ArrayList<Token>();
+		_score = _wands*3;
+		//Updates score
+		for (int i=0; i<_myTokens.size(); i++) {
+			setTokenScore(_myTokens.get(i));
+		}
 	}
 	
 	/**

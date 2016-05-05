@@ -38,6 +38,7 @@ public class GameBoard {
 	 * true if the current player has ended its turn; false otherwise; is reset to false between
 	 * switching current players
 	 */
+	@SuppressWarnings("unused")
 	private boolean _turnIsOver;
 	
 	/**
@@ -52,6 +53,7 @@ public class GameBoard {
 	private Token _currentTargetToken;
 	
 	/**
+	 * 
 	 * 2-dimensional array of type AbstractTile[][].  Holds the references to MovableTiles
 	 * and FixedTiles corresponding to tile pieces in the board game.
 	 */
@@ -119,6 +121,30 @@ public class GameBoard {
 			
 			generateFormulaCardRandomly();
 	}
+	
+	/**
+	 * 
+	 */
+	public void restoreSavedGame() {
+
+		Restore restore = new Restore().restoreSave();
+//		ArrayList<AbstractTile> state = r.restoreBoard();
+		
+		_players = restore.restoredPlayers;
+		
+		
+		
+		for(int i = 1; i < restore.boardState.length-1; i++) {
+			int x = i / 7;
+			int y = i % 7;
+			
+			_board[y][x] = restore.boardState[i];
+			
+		}
+		
+		//TODO: double check to make sure this is all done here!!
+	}
+	
 	/**
 	 * This method populates the board
 	 * by calling on populateRandomMoveableTileArray,populateBoardWithFixedTiles,
