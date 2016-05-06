@@ -159,9 +159,8 @@ public class GameBoard {
 		
 	}
 	
-	public void saveGameInstance(int n){
-		Save _save = new Save(n);
-		
+	public void saveGameInstance(){
+		Save _save = new Save(_players, _board, lastInPoint);
 		
 	}
 	

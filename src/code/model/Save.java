@@ -1,7 +1,7 @@
 package code.model;
 
 public class Save {
-	public Save(int lastInsertion) {
+	public Save(Player[] players, AbstractTile[][] boardState, int lastInsertion) {
 		
 	}
 }
