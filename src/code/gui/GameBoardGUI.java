@@ -229,6 +229,15 @@ public class GameBoardGUI implements Runnable, Observer{
 		_saveButton.setForeground(new Color(255,201,14));
 		_saveButton.setPreferredSize(new Dimension(250,100));
 		_saveButton.setBackground(new Color(0,0,0));
+		_saveButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 		
 		_restoreButton = new JButton("Restore");
@@ -236,6 +245,15 @@ public class GameBoardGUI implements Runnable, Observer{
 		_restoreButton.setForeground(new Color(255,201,14));
 		_restoreButton.setPreferredSize(new Dimension(250,100));
 		_restoreButton.setBackground(new Color(0,0,0));
+		_restoreButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(GameBoard.CURRENTPLAYER.getHasInsertedThisTurn() == false
+				&& GameBoard.CURRENTPLAYER.getHasMovedThisTurn() == false){
+					_gb.restoreSavedGame();
+				}
+			}
+		});
 		
 		
 		_wandPanel.add(_useMyWandButton);
