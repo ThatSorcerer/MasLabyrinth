@@ -493,5 +493,24 @@ public class Player {
 		return _hasUsedWand;
 	}
 	
+	/**
+	 * @param n
+	 * @return
+	 */
+	public int getIngredient(int n){{
+		if(n==1){
+			return _myCard.ingredient1;
+		}
+		else if(n==2){
+			return _myCard.ingredient2;
+		}
+		else if(n==3){
+			return _myCard.ingredient3;
+		}
+		else return 0;
+	}
+		
+	}
+	
 	
 }

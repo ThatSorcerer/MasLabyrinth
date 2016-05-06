@@ -53,6 +53,16 @@ public abstract class AbstractTile {
 	 */
 	protected boolean _initialized;
 	
+	/**
+	 * 
+	 */
+	private String _id;
+	
+	/**
+	 * 
+	 */
+	private int _rotation=0;
+	
 	//protected int _rotationTotal;
 	
 	/**
@@ -63,6 +73,7 @@ public abstract class AbstractTile {
 	public AbstractTile(){
 		_players = new ArrayList<Player>();
 		_initialized = false;
+		
 	}
 	
 	/**
@@ -89,6 +100,7 @@ public abstract class AbstractTile {
 		if (identity == "I"){
 			setDirections(0,0,1,1);
 		}
+		setId();
 	}
 	
 	/**
@@ -177,9 +189,11 @@ public abstract class AbstractTile {
 			_bottom = b; 
 			_left = l;
 			_right = r;
+			setId();
 			_initialized = true;
 			return true;
 		}
+
 		return false;
 	}
 	
@@ -263,31 +277,46 @@ public abstract class AbstractTile {
 		int r = d%360;
 		if(r==0){} 
 		else if(r==90 || r==-270){
+			rotateRight(r);
+		}
+		else if(r==-90 || r==270){
+			rotateLeft(r);
+		}
+		else if(r==180 || r==-180) {
+			rotate(90);
+			rotate(90);
+		}
+		else {} // d%90!=0;
+	}
+	
+	/**
+	 * @param r
+	 */
+	private void rotateLeft(int r){
+		if(r==-90 || r==270){
+			if(_rotation>0){_rotation -= 1;}
+			else{_rotation = 3;}
+			int temp = _left;
+			_left = _bottom;
+			_bottom = _right;
+			_right = _top;
+			_top = temp;	
+		}
+	}
+	
+	/**
+	 * @param r
+	 */
+	private void rotateRight(int r){
+		 if(r==90 || r==-270){
+			if(_rotation<3){ _rotation += 1;}
+			else{_rotation = 0;}
 			int temp = _right;
 			_right = _bottom;
 			_bottom = _left;
 			_left = _top;
 			_top = temp;
-			
 		}
-		else if(r==-90 || r==270){
-			int temp = _left;
-			_left = _bottom;
-			_bottom = _right;
-			_right = _top;
-			_top = temp;
-			
-		}
-		else if(r==180 || r==-180) {
-			int temp = _left;
-			_left = _right;
-			_right = temp;
-			temp = _top;
-			_top = _bottom;
-			_bottom = temp;
-			
-		}
-		else {} // d%90!=0;
 	}
 	
 	/**
@@ -328,6 +357,41 @@ public abstract class AbstractTile {
 	public ArrayList<Player> getPlayers(){
 		return _players;
 	}
+	
+	/**
+	 * @return
+	 */
+	public String getTileId(){
+		String tileType = _id + _rotation;
+		return tileType;
+	}
+	
+	/**
+	 * 
+	 */
+	private void setId(){
+		if((_top == 1 && _bottom ==1 && _left==0 && _right==0)||
+		   (_top == 0 && _bottom ==0 && _left==1 && _right==1)){
+			_id = "I";
+		}
+		if((_top == 0 && _bottom ==1 && _left==1 && _right==1)||
+		   (_top == 1 && _bottom ==0 && _left==1 && _right==1)||
+		   (_top == 1 && _bottom ==1 && _left==0 && _right==1)||
+		   (_top == 1 && _bottom ==1 && _left==1 && _right==0)){
+			_id = "T";
+		}
+		if((_top == 1 && _bottom ==0 && _left==1 && _right==0)||
+		   (_top == 1 && _bottom ==0 && _left==0 && _right==1)||
+		   (_top == 0 && _bottom ==1 && _left==1 && _right==0)||
+		   (_top == 0 && _bottom ==1 && _left==0 && _right==1)){
+			_id = "L";
+		}		
+	}
+	
+	
+	
+	
+	
 	
 } //end class definition
 
