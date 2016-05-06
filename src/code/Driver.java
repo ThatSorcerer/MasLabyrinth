@@ -25,7 +25,13 @@ public class Driver {
 	  * @author Josh,Ken
 	  */
 	 public static void main(String[] args){
-	 
+		 if(args.length>1){
+			 if(args[0] == "mySave" || args[0] == "mySave.mls"){
+				 Restore restore = new Restore().restoreSave();
+				 Player[] players = restore.restoredPlayers;
+				 GameBoard gb = new GameBoard(players.length, restore);
+			 }
+		 }
 		 int countNumOfPlayers = 0;
 		 for (String s: args){
 			 countNumOfPlayers ++;

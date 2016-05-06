@@ -130,12 +130,24 @@ public class GameBoard {
 			generateFormulaCardRandomly();
 	}
 	
+	public GameBoard(int numPlayers, Restore restore){
+		if(numPlayers < 0 || numPlayers > Player.maxNumberOfPlayers) {
+			numPlayers = 4;
+		}
+			_board = new AbstractTile[7][7];
+			_arrayOfMoveTiles = new ArrayList<MoveableTile>();
+			_arrayOfFormulaCards = new ArrayList<GenericFormulaCard>(); //
+			_numOfPlayers = numPlayers;
+			_players = new Player[_numOfPlayers];
+			_tokens = new ArrayList<Token>();
+			currentPlayerIndex = 0;
+			
+			restoreSavedGame(restore);
+	}
 	/**
 	 * @author slgreco, andreirv
 	 */
-	public void restoreSavedGame() {
-
-		Restore restore = new Restore().restoreSave();
+	public void restoreSavedGame(Restore restore) {
 //		ArrayList<AbstractTile> state = r.restoreBoard();
 		
 		_players = restore.restoredPlayers;

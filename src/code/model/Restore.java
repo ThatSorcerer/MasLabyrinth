@@ -38,9 +38,9 @@ public class Restore {
 	 */ 
 	private ArrayList<Player> players;
 	
-	Player[] restoredPlayers;
+	public Player[] restoredPlayers;
 	
-	AbstractTile[] boardState = new AbstractTile[49];
+	public AbstractTile[] boardState = new AbstractTile[49];
 	
 //	public Restore(){
 //		players =  new ArrayList();

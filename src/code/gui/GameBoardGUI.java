@@ -233,32 +233,33 @@ public class GameBoardGUI implements Runnable, Observer{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				
+//				_gb.saveGameInstance();
+			System.exit(0);	
 			}
 			
 		});
 		
 		
-		_restoreButton = new JButton("Restore");
-		_restoreButton.setFont(new Font("Garamond", Font.BOLD, 40));
-		_restoreButton.setForeground(new Color(255,201,14));
-		_restoreButton.setPreferredSize(new Dimension(250,100));
-		_restoreButton.setBackground(new Color(0,0,0));
-		_restoreButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(GameBoard.CURRENTPLAYER.getHasInsertedThisTurn() == false
-				&& GameBoard.CURRENTPLAYER.getHasMovedThisTurn() == false){
-					_gb.restoreSavedGame();
-				}
-			}
-		});
+//		_restoreButton = new JButton("Restore");
+//		_restoreButton.setFont(new Font("Garamond", Font.BOLD, 40));
+//		_restoreButton.setForeground(new Color(255,201,14));
+//		_restoreButton.setPreferredSize(new Dimension(250,100));
+//		_restoreButton.setBackground(new Color(0,0,0));
+//		_restoreButton.addActionListener(new ActionListener(){
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				if(GameBoard.CURRENTPLAYER.getHasInsertedThisTurn() == false
+//				&& GameBoard.CURRENTPLAYER.getHasMovedThisTurn() == false){
+//					_gb.restoreSavedGame();
+//				}
+//			}
+//		});
 		
 		
 		_wandPanel.add(_useMyWandButton);
 		_wandPanel.add(_saveButton);
-		_wandPanel.add(_restoreButton);
+//		_wandPanel.add(_restoreButton);
 		_wandWindow.add(_wandPanel);
 		_wandWindow.pack();
 		
