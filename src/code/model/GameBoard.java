@@ -68,7 +68,7 @@ public class GameBoard {
 	
 	/**
 	 * 
-	 * @author Andreirv SlGreko
+	 * @author Andreirv SlGreco
 	 * 
 	 */
 	private ArrayList<GenericFormulaCard> _arrayOfFormulaCards;
@@ -131,7 +131,7 @@ public class GameBoard {
 	}
 	
 	/**
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	public void restoreSavedGame() {
 
@@ -140,11 +140,9 @@ public class GameBoard {
 		
 		_players = restore.restoredPlayers;
 		
-		
-		
-		for(int i = 1; i < restore.boardState.length-1; i++) {
-			int x = i / 7;
-			int y = i % 7;
+		for(int i = 1; i < restore.boardState.length; i++) {
+			int x = i % 7;
+			int y = i / 7;
 			
 			_board[y][x] = restore.boardState[i];
 			
@@ -152,13 +150,17 @@ public class GameBoard {
 		
 		//TODO: double check to make sure this is all done here!!
 	}
-	
+	/**
+	 * @author andreirv
+	 */
 	public void setlastInPoint (int n){
 		
 		lastInPoint = n;
 		
 	}
-	
+	/**
+	 * @author andreirv
+	 */
 	public void saveGameInstance(){
 		Save _save = new Save(_players, _board, lastInPoint);
 		

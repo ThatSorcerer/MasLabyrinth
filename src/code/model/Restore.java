@@ -9,33 +9,33 @@ import java.util.ArrayList;
 
 public class Restore {
 	/**
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	private String dir = "saves/";
 	private String path = "mySave.mls";
 	private File restoreFile = new File(dir + path);
 	/**
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	private String playerLine = null; // This saves the line that contains Player data
 	/**
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	private String currentPlayerData = ""; // This saves the current Player being restored
 	
 	/**
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	private String tileLine = null;
 	
 	/**
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	private String currentTileData = "";
 	
 	/**
-	 * 
-	 */
+	 * @author slgreco, andreirv
+	 */ 
 	private ArrayList<Player> players;
 	
 	Player[] restoredPlayers;
@@ -49,7 +49,7 @@ public class Restore {
 //		}
 //	}
 	/**
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	private void getPlayersLine() {
 		try {
@@ -76,7 +76,7 @@ public class Restore {
 		}
 	}
 	/**
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	private void getTilesLine() {
 		try {
@@ -103,8 +103,7 @@ public class Restore {
 		}
 	}
 	/**
-	 * 
-	 * 
+	 * @author slgreco, andreirv
 	 */
 	private void getCurrentPlayerData() {
 		
@@ -125,8 +124,7 @@ public class Restore {
 	}
 	
 	/**
-	 * 
-	 * 
+	 * @author slgreco, ccaballe
 	 */
 	private void getCurrentTileData(int start) {
 		
@@ -147,7 +145,7 @@ public class Restore {
 	}
 	
 	/**
-	 * 
+	 * @author slgreco
 	 */
 	private void restorePlayer() {
 		
@@ -204,8 +202,7 @@ public class Restore {
 	}
 
 	/**
-	 * 
-	 * @return
+	 * @author slgreco
 	 */
 	int tileFocus = 0; // This is the position atwhich the Tile will be added to the boardState[]
 	
@@ -219,8 +216,8 @@ public class Restore {
 		char ch = currentTileData.charAt(pos+=1);
 		char chRot = currentPlayerData.charAt(pos+=1);
 		
-		int x = pos/7;
-		int y = pos%7;
+		int x = pos%7;
+		int y = pos/7;
 		if (x%2 == 0 && y%2 == 0) {
 			boardState[tileFocus] = new FixedTile(""+ch);	
 			boardState[tileFocus].rotate(Character.getNumericValue(chRot)*90);
@@ -266,8 +263,7 @@ public class Restore {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @author slgreco, ccaballe
 	 */
 	public Restore restoreSave() {
 		
@@ -291,10 +287,8 @@ public class Restore {
 	}
 	
 	/**
-	 * 
-	 * @return
-	 */
-	public boolean saveExists(){
+	 * @author slgreco, andreirv
+	 */ boolean saveExists(){
 		return restoreFile.exists() && restoreFile.isFile();
 	}
 }
